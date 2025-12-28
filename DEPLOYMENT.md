@@ -65,3 +65,21 @@ Serve the React app *through* the Express backend.
     ```javascript
     app.use(cors({ origin: 'https://my-game-frontend.vercel.app' }));
     ```
+
+## Option 3: Vercel Full Stack (Current Setup)
+This repo is configured for a **Vercel Monorepo** deployment, where Vercel handles both the Frontend and the Backend (as Serverless Functions).
+
+**How it works**:
+- `frontend/` provides the UI (built via Vite).
+- `api/` provides the Serverless Functions (bridging to `backend/server.js`).
+- `vercel.json` configures the routing.
+
+**Deployment Steps**:
+1.  Push everything to GitHub.
+2.  Import the project in Vercel.
+3.  **Important**: Set **Root Directory** to `.` (Leave it empty/default).
+    *   *Do NOT set it to `frontend`*. The `vercel.json` at the root handles the build process for you.
+4.  Deploy.
+5.  Your app will be live at `https://your-project.vercel.app`.
+    *   Frontend routes (like `/admin`) will work.
+    *   API routes (like `/api/game/play`) will work.
